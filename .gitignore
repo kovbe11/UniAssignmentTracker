@@ -21,15 +21,38 @@ specification.docx
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+### Angular ###
 
-### VS Code ###
-.vscode/
+# compiled output
+UI/dist
+UI/tmp
+UI/out-tsc
+# Only exists if Bazel was run
+UI/bazel-out
+
+# dependencies
+UI/node_modules
+
+# profiling files
+UI/chrome-profiler-events*.json
+UI/speed-measure-plugin*.json
+
+# IDEs and editors
+UI/.c9/
+UI/*.launch
+UI/.settings/
+UI/*.sublime-workspace
+
+# misc
+UI/.sass-cache
+UI/connect.lock
+UI/coverage
+UI/libpeerconnection.log
+UI/npm-debug.log
+UI/yarn-error.log
+UI/testem.log
+UI/typings
+
+# System Files
+UI/.DS_Store
+UI/Thumbs.db
