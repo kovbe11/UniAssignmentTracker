@@ -4,11 +4,13 @@ package bme.UniAssignmentTracker.domain;
 import bme.UniAssignmentTracker.domain.requirements.Assignment;
 import bme.UniAssignmentTracker.domain.requirements.Exam;
 import bme.UniAssignmentTracker.domain.requirements.Project;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
