@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class SubjectTests {
+class SubjectTests {
 
     @Autowired
     SubjectService subjectService;
@@ -38,5 +38,12 @@ public class SubjectTests {
     public void testSubjectCanBeUnsubscribedFrom(){
 
     }
+
+    @Test
+    public void testDeletingSubjectDeletesAllItsRequirements(){
+
+    }
+
+
 
 }

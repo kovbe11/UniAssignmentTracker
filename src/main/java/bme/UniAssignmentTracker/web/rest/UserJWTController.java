@@ -7,13 +7,10 @@ import bme.UniAssignmentTracker.repository.UserRepository;
 import bme.UniAssignmentTracker.security.AuthoritiesConstants;
 import bme.UniAssignmentTracker.security.JwtUtils;
 import bme.UniAssignmentTracker.security.dto.LoginDTO;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.beans.Encoder;
 import java.util.Set;
 
 @RestController
@@ -54,6 +50,7 @@ public class UserJWTController {
         return ResponseEntity.ok().body(jwt);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/registerAdmin")
     public ResponseEntity<String> registerAdmin(@Valid @RequestBody LoginDTO loginDTO) {
         if (userRepository.existsByUsername(loginDTO.getUsername())) {
@@ -73,7 +70,7 @@ public class UserJWTController {
         return ResponseEntity.status(HttpStatus.CREATED).body("User is created with username: " + loginDTO.getUsername());
     }
 
-    @PostMapping("/registerUser")
+    @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody LoginDTO loginDTO) {
         if (userRepository.existsByUsername(loginDTO.getUsername())) {
             return ResponseEntity.badRequest().body("User already exists!");

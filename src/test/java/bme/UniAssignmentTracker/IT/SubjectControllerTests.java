@@ -20,11 +20,6 @@ public class SubjectControllerTests {
     }
 
     @Test
-    public void testSubjectCanBeDeleted(){
-
-    }
-
-    @Test
     public void testSubjectCanBeSubscribedTo(){
 
     }

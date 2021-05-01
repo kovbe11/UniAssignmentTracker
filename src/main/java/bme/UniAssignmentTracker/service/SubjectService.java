@@ -35,45 +35,47 @@ public class SubjectService {
         return subjectRepository.findAll(pageable);
     }
 
-    public List<Subject> findAll(){
+    @Transactional(readOnly = true)
+    public List<Subject> findAll() {
         log.debug("Find all subjects requested");
         return subjectRepository.findAll();
     }
 
-    public Subject findSubjectOrThrow(Long id){
+    @Transactional(readOnly = true)
+    public Subject findSubjectOrThrow(Long id) {
         //TODO: custom exception
         return findSubject(id).orElseThrow();
     }
 
-    public Optional<Subject> findSubject(Long id){
+    @Transactional(readOnly = true)
+    public Optional<Subject> findSubject(Long id) {
         log.debug("Find subject by id requested");
         return subjectRepository.findById(id);
     }
 
-
+    @Transactional(readOnly = true)
     public List<Subject> findUsersSubjects() {
         User user = getCurrentUser();
         log.debug("Find user's subjects requested for {}", user.getUsername());
         return List.copyOf(user.getUsersSubjects());
     }
 
-    public void delete(Long id)
-    {
+    public void delete(Long id) {
         log.debug("Delete subject by id requested");
         subjectRepository.deleteById(id);
     }
 
-    public void delete(Subject subject){
+    public void delete(Subject subject) {
         log.debug("Delete subject by subject requested");
         subjectRepository.delete(subject);
     }
 
-    public Subject save(Subject subject){
+    public Subject save(Subject subject) {
         log.debug("Save subject requested");
         return subjectRepository.save(subject);
     }
 
-    public void subscribeToSubject(Subject subject){
+    public void subscribeToSubject(Subject subject) {
         User user = getCurrentUser();
 
         log.debug("Subscribe to {} was requested for {}", subject.getName(), user.getUsername());
@@ -83,7 +85,7 @@ public class SubjectService {
         userRepository.save(user);
     }
 
-    public void unsubscribeFromSubject(Subject subject){
+    public void unsubscribeFromSubject(Subject subject) {
         User user = getCurrentUser();
 
         log.debug("Unsubscribe from {} was requested for {}", subject.getName(), user.getUsername());
@@ -93,7 +95,7 @@ public class SubjectService {
         userRepository.save(user);
     }
 
-    private User getCurrentUser(){
+    private User getCurrentUser() {
         //TODO: custom exception
         String username = SecurityUtils.getCurrentUserLogin().orElseThrow();
         return userRepository.findByUsername(username).orElseThrow();

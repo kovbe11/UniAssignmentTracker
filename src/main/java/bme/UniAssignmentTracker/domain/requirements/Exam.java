@@ -1,6 +1,8 @@
 package bme.UniAssignmentTracker.domain.requirements;
 
 import bme.UniAssignmentTracker.domain.Subject;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,6 +29,8 @@ public class Exam {
     @Column(length = 63)
     private String scoring;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JsonIgnore
     private Subject subject;
 }

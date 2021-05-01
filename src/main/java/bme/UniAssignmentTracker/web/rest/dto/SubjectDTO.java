@@ -22,7 +22,6 @@ public class SubjectDTO {
     private String name;
 
     @Size(max = 255)
-    @Column(length = 255)
     private String description;
     @Size(max = 511)
     @Column(length = 511)
