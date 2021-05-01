@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
@@ -18,8 +19,12 @@ public class Exam {
     private Long id;
 
     private Date zhDate;
+    @Size(max = 255)
     private String experiences;
+    @Size(max = 255)
     private String minimumRequirements;
+    @Size(max = 63)
+    @Column(length = 63)
     private String scoring;
 
     @ManyToOne

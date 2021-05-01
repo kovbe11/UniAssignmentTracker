@@ -1,6 +1,7 @@
 package bme.UniAssignmentTracker.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,15 +9,14 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "usersSubjects")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +45,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "subject_id", referencedColumnName = "id")},
             uniqueConstraints= @UniqueConstraint(columnNames={"subject_id", "user_id"}))
-    private List<Subject> usersSubjects = new ArrayList<>();
+    private Set<Subject> usersSubjects = new HashSet<>();
 
     public void subscribeToSubject(Subject subject){
         usersSubjects.add(subject);

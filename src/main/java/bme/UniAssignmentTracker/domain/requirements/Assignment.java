@@ -1,6 +1,7 @@
 package bme.UniAssignmentTracker.domain.requirements;
 
 import bme.UniAssignmentTracker.domain.Subject;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.sql.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Assignment {
     @Id
