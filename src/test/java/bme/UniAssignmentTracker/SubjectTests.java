@@ -39,6 +39,7 @@ class SubjectTests {
 
     }
 
+    //to check if i have cascades set up correctly
     @Test
     public void testDeletingSubjectDeletesAllItsRequirements(){
 

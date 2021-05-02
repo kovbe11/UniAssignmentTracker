@@ -4,10 +4,7 @@ package bme.UniAssignmentTracker.web.rest;
 import bme.UniAssignmentTracker.domain.Subject;
 import bme.UniAssignmentTracker.service.SubjectService;
 import bme.UniAssignmentTracker.web.rest.dto.SubjectDTO;
-import bme.UniAssignmentTracker.web.rest.util.PaginationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,11 +23,9 @@ public class SubjectController {
     SubjectService subjectService;
 
     @GetMapping
-    public ResponseEntity<List<Subject>> getAll(Pageable pageable) {
-        final Page<Subject> foundPage = subjectService.findAll(pageable);
+    public ResponseEntity<List<Subject>> getAll() {
         return ResponseEntity.ok()
-                .headers(PaginationUtil.generatePaginationHttpHeaders(foundPage, "api/subjects"))
-                .body(foundPage.getContent());
+                .body(subjectService.findAll());
     }
 
     @PreAuthorize("hasRole('USER')")

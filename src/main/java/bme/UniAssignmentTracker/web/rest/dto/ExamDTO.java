@@ -25,5 +25,4 @@ public class ExamDTO {
     @Column(length = 63)
     private String scoring;
 
-    Long subjectId;
 }

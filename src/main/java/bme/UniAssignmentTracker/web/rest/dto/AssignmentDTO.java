@@ -15,7 +15,7 @@ import java.sql.Date;
 @AllArgsConstructor
 public class AssignmentDTO {
 
-    private boolean isOptional;
+    private Boolean isOptional;
     private Date deadline;
     @Size(max = 255)
     private String minimalRequirement;
