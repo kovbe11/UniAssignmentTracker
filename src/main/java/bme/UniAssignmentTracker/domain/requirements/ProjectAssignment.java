@@ -1,11 +1,7 @@
 package bme.UniAssignmentTracker.domain.requirements;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -16,13 +12,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @PrimaryKeyJoinColumn(name = "assignment_id")
-public class ProjectAssignment extends Assignment{
+public class ProjectAssignment extends Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JsonIgnore
+    @Getter(AccessLevel.NONE)
     private Project project;
+
+    @JsonBackReference
+    Project getProject() {
+        return project;
+    }
 }

@@ -5,10 +5,8 @@ import bme.UniAssignmentTracker.domain.requirements.Assignment;
 import bme.UniAssignmentTracker.domain.requirements.Exam;
 import bme.UniAssignmentTracker.domain.requirements.Project;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -40,15 +38,36 @@ public class Subject {
 
     //this will contain project assignments too
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @Getter(AccessLevel.NONE)
     private Set<Assignment> assignments = new HashSet<>();
+
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @Getter(AccessLevel.NONE)
     private Set<Project> projects = new HashSet<>();
+
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @Getter(AccessLevel.NONE)
     private Set<Exam> exams = new HashSet<>();
 
     @JsonIgnore
     @ManyToMany(mappedBy = "usersSubjects")
     private Set<User> subscribedUsers = new HashSet<>();
+
+    @JsonManagedReference
+    public Set<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    @JsonManagedReference
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    @JsonManagedReference
+    public Set<Exam> getExams() {
+        return exams;
+    }
+
 
     public void subscribeUser(User user) {
         subscribedUsers.add(user);

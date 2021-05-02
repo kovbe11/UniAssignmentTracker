@@ -2,11 +2,7 @@ package bme.UniAssignmentTracker.domain.requirements;
 
 import bme.UniAssignmentTracker.domain.Subject;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -32,13 +28,15 @@ public class Project {
     @Column(length = 127)
     private String documentation;
 
-    @OneToMany(mappedBy = "project", cascade={CascadeType.PERSIST, CascadeType.REMOVE})
+    @Getter(AccessLevel.NONE)
+    Subject subject;
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<ProjectAssignment> assignments;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
-    @JsonIgnore
-    Subject subject;
+    Subject getSubject() {
+        return subject;
+    }
 
     public void addAssignment(ProjectAssignment projectAssignment) {
         assignments.add(projectAssignment);

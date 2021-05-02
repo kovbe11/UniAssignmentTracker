@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Service
@@ -39,7 +40,7 @@ public class ProjectService {
         return projectRepository.findById(id);
     }
 
-    public Project create(Long subjectId, ProjectDTO projectDTO){
+    public Project createProject(Long subjectId, ProjectDTO projectDTO) {
         log.debug("Create project requested");
         var subject = subjectService.findSubjectOrThrow(subjectId);
         var project = new Project();
@@ -52,17 +53,17 @@ public class ProjectService {
         return projectRepository.save(project);
     }
 
-    public Project patchProject(Long id, ProjectDTO projectDTO) {
+    public Project patchProject(Long id, @NotNull ProjectDTO projectDTO) {
         log.debug("Patch project requested");
         var project = findProjectOrThrow(id);
 
-        if(projectDTO.getDocumentation() != null){
+        if (projectDTO.getDocumentation() != null) {
             project.setDocumentation(projectDTO.getDocumentation());
         }
-        if(projectDTO.getExperiences() != null){
+        if (projectDTO.getExperiences() != null) {
             project.setDocumentation(projectDTO.getDocumentation());
         }
-        if(projectDTO.getSpecification() != null){
+        if (projectDTO.getSpecification() != null) {
             project.setSpecification(projectDTO.getSpecification());
         }
 
@@ -93,7 +94,7 @@ public class ProjectService {
         projectAssignment.setDeadline(assignmentDTO.getDeadline());
         projectAssignment.setDescription(assignmentDTO.getDescription());
         projectAssignment.setMinimalRequirement(assignmentDTO.getMinimalRequirement());
-        projectAssignment.setOptional(assignmentDTO.isOptional());
+        projectAssignment.setOptional(assignmentDTO.getIsOptional());
 
         return projectAssignmentRepository.save(projectAssignment);
     }

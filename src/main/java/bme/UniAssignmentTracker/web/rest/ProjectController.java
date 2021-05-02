@@ -7,6 +7,7 @@ import bme.UniAssignmentTracker.web.rest.dto.AssignmentDTO;
 import bme.UniAssignmentTracker.web.rest.dto.ProjectDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,14 +31,16 @@ public class ProjectController {
         return ResponseEntity.ok(optProject.get());
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/subjects/{subjectId}/projects")
     public ResponseEntity<Project> createProject(@PathVariable Long subjectId,
                                                  @RequestBody @Valid ProjectDTO projectDTO) throws URISyntaxException {
-        var project = projectService.create(subjectId, projectDTO);
+        var project = projectService.createProject(subjectId, projectDTO);
         return ResponseEntity.created(new URI("/projects/" + project.getId()))
                 .body(project);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PatchMapping("projects/{id}")
     public ResponseEntity<Project> patchProject(@PathVariable Long id,
                                                 @RequestBody @Valid ProjectDTO projectDTO) {
@@ -45,13 +48,15 @@ public class ProjectController {
         return ResponseEntity.ok(project);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("projects/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
         projectService.deleteProject(id);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/subjects/{subjectId}/projects/{projectId}/assignment")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/subjects/{subjectId}/projects/{projectId}/assignments")
     public ResponseEntity<ProjectAssignment> createProjectAssignment(@PathVariable Long subjectId,
                                                                      @PathVariable Long projectId,
                                                                      @RequestBody @Valid AssignmentDTO assignmentDTO) throws URISyntaxException {

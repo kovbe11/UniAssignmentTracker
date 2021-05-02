@@ -1,14 +1,11 @@
-package bme.UniAssignmentTracker.IT;
+package bme.UniAssignmentTracker;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-public class ProjectControllerTests {
-
+public class ProjectTests {
 
     @Test
-    public void testProjectCanBeCreated(){
+    public void testProjectCanBeCreated() {
 
     }
 

@@ -2,11 +2,7 @@ package bme.UniAssignmentTracker.domain.requirements;
 
 import bme.UniAssignmentTracker.domain.Subject;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -31,8 +27,11 @@ public class Assignment {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JsonIgnore
+    @Getter(AccessLevel.NONE)
     Subject subject;
 
+    @JsonBackReference
+    Subject getSubject() {
+        return subject;
+    }
 }
