@@ -1,0 +1,11 @@
+<div>
+<mat-selection-list #shoes [multiple]="false">
+  <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+    {{shoe}}
+  </mat-list-option>
+</mat-selection-list>
+<mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+<p>
+  Option selected: {{shoes.selectedOptions.selected[0]?.value}}
+</p>

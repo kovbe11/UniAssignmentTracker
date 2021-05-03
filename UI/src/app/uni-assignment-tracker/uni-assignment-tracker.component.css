@@ -1,0 +1,39 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#toggleButton{
+  flex: 0 0 10%;
+}
+
+.title{
+  flex: 0 0 30%;
+}
+
+.placeholder{
+  flex: 0 0 30%;
+}
+.username{
+  flex: 0 0 20%;
+  text-align: right;
+}
+.logout{
+  display: flex;
+  justify-content: right;
+  padding-left: 3%;
+  flex: 0 0 10%;
+}

@@ -1,0 +1,29 @@
+.mat-column-subscription{
+  justify-content: center;
+  padding-left: 1%;
+  padding-right: 1%;
+  flex: 0 0 35%;
+}
+
+.mat-column-name{
+  flex: 0 0 35%
+}
+
+.mat-column-exams{
+  flex: 0 0 15%;
+}
+
+.mat-column-projects{
+  flex: 0 0 15%;
+}
+
+mat-cell, mat-header-cell, mat-footer-cell{
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.mat-raised-button{
+  min-width: fit-content;
+  max-width: 50%;
+}

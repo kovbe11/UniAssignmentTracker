@@ -1,0 +1,44 @@
+<div>
+  <mat-table mat-table [dataSource]="dataSource">
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Subject's name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- #Projects Column -->
+    <ng-container matColumnDef="projects">
+      <mat-header-cell *matHeaderCellDef>No. Projects</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <!-- #Exams Column -->
+    <ng-container matColumnDef="exams">
+      <mat-header-cell *matHeaderCellDef>No. Exams</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="subscription">
+      <mat-header-cell mat-header-cell *matHeaderCellDef>Subscription</mat-header-cell>
+      <mat-cell  *matCellDef="let row">
+        <div *ngIf="row.isSubscribed; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <button mat-raised-button color="warn">
+            Unsubscribe
+          </button>
+        </ng-template>
+        <ng-template #elseBlock>
+          <button mat-raised-button color="accent">
+            Subscribe
+          </button>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+
