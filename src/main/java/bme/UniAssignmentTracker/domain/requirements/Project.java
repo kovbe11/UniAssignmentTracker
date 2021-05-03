@@ -31,7 +31,7 @@ public class Project {
     @ManyToOne(fetch = FetchType.LAZY)
     @Getter(AccessLevel.NONE)
     Subject subject;
-
+	
     @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<ProjectAssignment> assignments;
 
