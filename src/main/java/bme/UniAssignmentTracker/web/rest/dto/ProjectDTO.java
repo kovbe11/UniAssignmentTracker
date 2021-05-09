@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @EqualsAndHashCode
 @Getter
@@ -22,5 +23,7 @@ public class ProjectDTO {
     @Size(max = 127)
     @Column(length = 127)
     private String documentation;
+
+    private List<AssignmentDTO> projectAssignments;
 
 }

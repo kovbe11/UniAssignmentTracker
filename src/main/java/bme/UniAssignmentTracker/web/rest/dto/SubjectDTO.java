@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
@@ -26,16 +28,29 @@ public class SubjectDTO {
     @Size(max = 511)
     @Column(length = 511)
     private String experiences;
-    @Size(max = 50)
-    @Column(length = 50)
+    @Size(max = 63)
+    @Column(length = 63)
     private String scoring;
+
+
+    @Min(1)
+    @Max(30)
+    private Short officialCredit;
+
+    @Min(1)
+    @Max(30)
+    private Short experiencedCredit;
+
 
     public Subject toSubject(){
         var subject = new Subject();
+
         subject.setName(name);
         subject.setDescription(description);
         subject.setExperiences(experiences);
         subject.setScoring(scoring);
+        subject.setOfficialCredit(officialCredit);
+        subject.setExperiencedCredit(experiencedCredit);
 
         return subject;
     }

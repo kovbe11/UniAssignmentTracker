@@ -47,7 +47,7 @@ public class SubjectService {
 
     @Transactional(readOnly = true)
     public List<Subject> findUsersSubjects() {
-        User user = getCurrentUser();
+        var user = getCurrentUser();
         log.debug("Find user's subjects requested for {}", user.getUsername());
         return List.copyOf(user.getUsersSubjects());
     }
@@ -68,7 +68,7 @@ public class SubjectService {
     }
 
     public void subscribeToSubject(Subject subject) {
-        User user = getCurrentUser();
+        var user = getCurrentUser();
 
         log.debug("Subscribe to {} was requested for {}", subject.getName(), user.getUsername());
 
@@ -78,7 +78,7 @@ public class SubjectService {
     }
 
     public void unsubscribeFromSubject(Subject subject) {
-        User user = getCurrentUser();
+        var user = getCurrentUser();
 
         log.debug("Unsubscribe from {} was requested for {}", subject.getName(), user.getUsername());
 

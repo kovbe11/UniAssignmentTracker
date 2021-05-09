@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
 public class ProjectController {

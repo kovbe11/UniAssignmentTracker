@@ -16,14 +16,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 import java.util.Set;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/")
 public class UserJWTController {
@@ -42,12 +41,17 @@ public class UserJWTController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginDTO loginDTO) {
         var authToken = new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword());
-        Authentication auth = authManager.authenticate(authToken);
+        Authentication auth;
+        try {
+            auth = authManager.authenticate(authToken);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Wrong username or password!"));
+        }
         SecurityContextHolder.getContext().setAuthentication(auth);
         String jwt = jwtUtils.generateJwtToken(auth);
-        return ResponseEntity.ok().body(jwt);
+        return ResponseEntity.ok().body(Map.of("token", jwt));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -57,8 +61,8 @@ public class UserJWTController {
             return ResponseEntity.badRequest().body("User already exists!");
         }
 
-        User user = new User();
-        Authority admin = new Authority();
+        var user = new User();
+        var admin = new Authority();
         admin.setName(AuthoritiesConstants.ADMIN);
 
         user.setUsername(loginDTO.getUsername());
@@ -76,8 +80,8 @@ public class UserJWTController {
             return ResponseEntity.badRequest().body("User already exists!");
         }
 
-        User user = new User();
-        Authority userRole = new Authority();
+        var user = new User();
+        var userRole = new Authority();
         userRole.setName(AuthoritiesConstants.USER);
 
         user.setUsername(loginDTO.getUsername());

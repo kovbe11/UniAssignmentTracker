@@ -1,12 +1,17 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-               [mode]="(isHandset$ | async) ? 'over' : 'side'"
-               [opened]="(isHandset$ | async) === false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <mat-nav-list>
       <a mat-list-item routerLink="/">All subjects</a>
       <a mat-list-item routerLink="/myAssignments">My assignments</a>
       <a mat-list-item routerLink="/mySubjects">My subjects</a>
+      <a *ngIf="isAdmin" mat-list-item routerLink="/admin">Admin page</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -17,20 +22,23 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <div class="title" >
+      <div class="title">
         <span>University assignments tracker</span>
       </div>
       <span class="placeholder"></span>
-      <span class="username">
+      <span *ngIf="currentUser" class="username">
         <mat-icon>person</mat-icon>
-        Username
+        {{ currentUser.username }}
       </span>
-      <div class="logout">
-        <button mat-raised-button >Logout</button>
+      <div *ngIf="currentUser" class="logout">
+        <button mat-raised-button (click)="logout()">Logout</button>
       </div>
+      <span *ngIf="!currentUser" class="placeholder"></span>
+      <button *ngIf="!currentUser" (click)="login()" mat-raised-button>Login</button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

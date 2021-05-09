@@ -16,22 +16,22 @@
   z-index: 1;
 }
 
-#toggleButton{
+#toggleButton {
   flex: 0 0 10%;
 }
 
-.title{
+.title {
   flex: 0 0 30%;
 }
 
-.placeholder{
+.placeholder {
   flex: 0 0 30%;
 }
-.username{
+.username {
   flex: 0 0 20%;
   text-align: right;
 }
-.logout{
+.logout {
   display: flex;
   justify-content: right;
   padding-left: 3%;

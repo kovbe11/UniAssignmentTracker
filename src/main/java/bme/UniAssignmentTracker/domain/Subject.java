@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +37,14 @@ public class Subject {
     @Size(max = 63)
     @Column(length = 63)
     private String scoring;
+
+    @Min(1)
+    @Max(30)
+    private Short officialCredit;
+
+    @Min(1)
+    @Max(30)
+    private Short experiencedCredit;
 
     //this will contain project assignments too
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)

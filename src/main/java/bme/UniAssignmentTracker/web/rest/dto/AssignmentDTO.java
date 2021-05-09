@@ -18,7 +18,7 @@ public class AssignmentDTO {
     private Boolean isOptional;
     private Date deadline;
     @Size(max = 255)
-    private String minimalRequirement;
+    private String minimalRequirements;
     @Size(max = 255)
     private String description;
 

@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="mat-app-background d-flex flex-column vh-100 justify-content-center align-items-center">
+  <mat-card class="col-8 col-sm-6 col-md-5 max-width">
+    <form
+      [formGroup]="loginForm"
+      class="d-flex flex-wrap justify-content-center align-content-center w-100 h-100"
+    >
+      <mat-form-field appearance="standard" class="col-12 col-sm-8 d-block">
+        <mat-label>Username</mat-label>
+        <input tabindex="1" matInput type="text" formControlName="username" />
+        <mat-error *ngIf="username.invalid">This field is required</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-12 col-sm-8 d-block mb-2">
+        <mat-label>Enter password</mat-label>
+        <input tabindex="2" matInput type="password" formControlName="password" />
+        <mat-error *ngIf="password.invalid">This field is required</mat-error>
+      </mat-form-field>
+      <div *ngIf="error" class="text-danger mat-hint d-block col-12 text-center mb-1">
+        Wrong username or password!
+      </div>
+      <button
+        tabindex="3"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="col-6 d-block"
+        (click)="onSubmit()"
+      >
+        Login
+      </button>
+      <button mat-button routerLink="/" id="guestLink" class="my-2">Stay as guest</button>
+    </form>
+  </mat-card>
+</div>
