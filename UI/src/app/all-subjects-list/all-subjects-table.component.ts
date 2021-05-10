@@ -3,6 +3,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthenticationService } from '../auth/authentication.service';
 import { Router } from '@angular/router';
+import { SubjectService } from '../service/subject.service';
+import { Subject } from '../model/Subject';
 
 @Component({
   selector: 'app-all-subjects-table',
@@ -11,26 +13,36 @@ import { Router } from '@angular/router';
 })
 export class AllSubjectsTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'projects', 'exams', 'subscription'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<Subject>([]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(
+    private authenticationService: AuthenticationService,
+    private router: Router,
+    private subjectService: SubjectService
+  ) {}
 
   ngAfterViewInit() {
+    this.subjectService.getAllSubjects().subscribe((data) => {
+      this.dataSource.data = data || [];
+    });
     this.dataSource.paginator = this.paginator;
   }
 
-  subscribe() {
+  subscribe(row: any) {
     if (!this.authenticationService.isAuthenticated) {
       this.router.navigate(['/login']);
     }
-
-    console.log('subscribed');
+    this.subjectService.subscribeToSubject(row).subscribe((_) => {
+      row.subscribed = true;
+    });
   }
 
-  unsubscribe() {
-    console.log('unsubscribed');
+  unsubscribe(row: any) {
+    this.subjectService.unsubscribeFromSubject(row).subscribe((_) => {
+      row.subscribed = false;
+    });
   }
 }
 

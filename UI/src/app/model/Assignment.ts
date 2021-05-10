@@ -4,4 +4,5 @@ export class Assignment {
   deadline: Date;
   minimalRequirements: string;
   description: string;
+  label: string;
 }

@@ -26,6 +26,9 @@ public class Assignment {
     @Size(max = 255)
     private String description;
 
+    @Size(max = 31)
+    private String label;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @Getter(AccessLevel.NONE)
     Subject subject;

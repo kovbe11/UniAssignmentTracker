@@ -29,6 +29,9 @@ public class Exam {
     @Column(length = 63)
     private String scoring;
 
+    @Size(max = 31)
+    private String label;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @Getter(AccessLevel.NONE)
     private Subject subject;

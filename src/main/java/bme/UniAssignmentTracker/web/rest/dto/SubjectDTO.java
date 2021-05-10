@@ -1,16 +1,12 @@
 package bme.UniAssignmentTracker.web.rest.dto;
 
 import bme.UniAssignmentTracker.domain.Subject;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
-
 
 
 @AllArgsConstructor

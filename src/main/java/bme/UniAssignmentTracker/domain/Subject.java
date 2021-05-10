@@ -46,6 +46,9 @@ public class Subject {
     @Max(30)
     private Short experiencedCredit;
 
+    @Transient
+    private boolean isSubscribed = false;
+
     //this will contain project assignments too
     @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @Getter(AccessLevel.NONE)
@@ -78,7 +81,6 @@ public class Subject {
         return exams;
     }
 
-
     public void subscribeUser(User user) {
         subscribedUsers.add(user);
     }
@@ -86,6 +88,5 @@ public class Subject {
     public void unsubscribeUser(User user) {
         subscribedUsers.remove(user);
     }
-
 
 }

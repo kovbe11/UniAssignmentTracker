@@ -4,4 +4,5 @@ export class Exam {
   experiences: string;
   minimumRequirements: string;
   scoring: string;
+  label: string;
 }

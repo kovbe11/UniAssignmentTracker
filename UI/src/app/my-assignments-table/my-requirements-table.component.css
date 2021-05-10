@@ -6,7 +6,7 @@ tr.detail-row {
   height: 0;
 }
 
-tr.element-row:not(.example-expanded-row):hover {
+tr.element-row:not(.expanded-row):hover {
   background: rgba(159, 39, 210, 0.27);
 }
 

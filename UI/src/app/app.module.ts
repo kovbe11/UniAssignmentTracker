@@ -11,7 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MySubjectsListComponent } from './my-subjects-list/my-subjects-list.component';
-import { MyAssignmentsTableComponent } from './my-assignments-table/my-assignments-table.component';
+import { MyRequirementsTableComponent } from './my-assignments-table/my-requirements-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AllSubjectsTableComponent } from './all-subjects-list/all-subjects-table.component';
@@ -26,6 +26,10 @@ import { JwtInterceptor } from './auth/jwt-interceptor';
 import { ErrorInterceptor } from './auth/error-interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { SubjectService } from './service/subject.service';
+import { RequirementService } from './service/requirement.service';
+import { ProjectService } from './service/project.service';
+import { ExamService } from './service/exam.service';
+import { AssignmentService } from './service/assignment.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,7 @@ import { SubjectService } from './service/subject.service';
     UniAssignmentTrackerComponent,
     MySubjectsListComponent,
     AllSubjectsTableComponent,
-    MyAssignmentsTableComponent,
+    MyRequirementsTableComponent,
     LoginComponent,
     AdminComponent,
   ],
@@ -59,6 +63,10 @@ import { SubjectService } from './service/subject.service';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     SubjectService,
+    RequirementService,
+    ProjectService,
+    ExamService,
+    AssignmentService,
   ],
   bootstrap: [AppComponent],
 })

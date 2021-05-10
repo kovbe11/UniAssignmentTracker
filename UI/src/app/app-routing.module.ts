@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllSubjectsTableComponent } from './all-subjects-list/all-subjects-table.component';
 import { MySubjectsListComponent } from './my-subjects-list/my-subjects-list.component';
-import { MyAssignmentsTableComponent } from './my-assignments-table/my-assignments-table.component';
+import { MyRequirementsTableComponent } from './my-assignments-table/my-requirements-table.component';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { UniAssignmentTrackerComponent } from './uni-assignment-tracker/uni-assignment-tracker.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +25,7 @@ const routes: Routes = [
       },
       {
         path: 'myAssignments',
-        component: MyAssignmentsTableComponent,
+        component: MyRequirementsTableComponent,
         canActivate: [AuthGuardService],
       },
       {

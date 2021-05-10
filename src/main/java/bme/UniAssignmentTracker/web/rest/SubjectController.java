@@ -29,7 +29,7 @@ public class SubjectController {
                 .body(subjectService.findAll());
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     @GetMapping("/subscribed")
     public ResponseEntity<List<Subject>> getSubscribedSubjects() {
         var subscribedSubjects = subjectService.findUsersSubjects();
@@ -50,7 +50,7 @@ public class SubjectController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Subject> create(@RequestBody @Valid SubjectDTO subject) throws URISyntaxException {
-        Subject savedSubject = subjectService.save(subject.toSubject());
+        var savedSubject = subjectService.save(subject.toSubject());
         return ResponseEntity.created(new URI("/api/subjects/" + savedSubject.getId()))
                 .body(savedSubject);
     }
@@ -71,7 +71,7 @@ public class SubjectController {
         if (!id.equals(subject.getId()) && !isCreate) {
             return ResponseEntity.badRequest().build();
         }
-        Subject savedSubject = subjectService.save(subject);
+        var savedSubject = subjectService.save(subject);
 
         if (isCreate) {
             return ResponseEntity.created(new URI("/api/subjects/" + id)).body(savedSubject);
@@ -80,7 +80,7 @@ public class SubjectController {
     }
 
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     @PostMapping("/subscribe/{id}")
     public ResponseEntity<Void> subscribe(@PathVariable Long id) {
         Optional<Subject> subject = subjectService.findSubject(id);
@@ -91,7 +91,7 @@ public class SubjectController {
         return ResponseEntity.noContent().build();
     }
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') || hasRole('ADMIN')")
     @PostMapping("/unsubscribe/{id}")
     public ResponseEntity<Void> unsubscribe(@PathVariable Long id) {
         Optional<Subject> subject = subjectService.findSubject(id);

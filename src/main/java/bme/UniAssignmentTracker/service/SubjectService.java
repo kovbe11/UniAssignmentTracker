@@ -2,10 +2,7 @@ package bme.UniAssignmentTracker.service;
 
 
 import bme.UniAssignmentTracker.domain.Subject;
-import bme.UniAssignmentTracker.domain.User;
 import bme.UniAssignmentTracker.repository.SubjectRepository;
-import bme.UniAssignmentTracker.repository.UserRepository;
-import bme.UniAssignmentTracker.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +22,17 @@ public class SubjectService {
     private SubjectRepository subjectRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Transactional(readOnly = true)
     public List<Subject> findAll() {
         log.debug("Find all subjects requested");
-        return subjectRepository.findAll();
+        var user = userService.getCurrentUserOrNull();
+        var subjects = subjectRepository.findAll();
+        if(user != null){
+            subjects.forEach(subject -> subject.setSubscribed(user.getUsersSubjects().contains(subject)));
+        }
+        return subjects;
     }
 
     @Transactional(readOnly = true)
@@ -47,7 +49,7 @@ public class SubjectService {
 
     @Transactional(readOnly = true)
     public List<Subject> findUsersSubjects() {
-        var user = getCurrentUser();
+        var user = userService.getCurrentUser();
         log.debug("Find user's subjects requested for {}", user.getUsername());
         return List.copyOf(user.getUsersSubjects());
     }
@@ -68,29 +70,23 @@ public class SubjectService {
     }
 
     public void subscribeToSubject(Subject subject) {
-        var user = getCurrentUser();
+        var user = userService.getCurrentUser();
 
         log.debug("Subscribe to {} was requested for {}", subject.getName(), user.getUsername());
 
         user.subscribeToSubject(subject);
         subject.subscribeUser(user);
-        userRepository.save(user);
+        userService.saveUser(user);
     }
 
     public void unsubscribeFromSubject(Subject subject) {
-        var user = getCurrentUser();
+        var user = userService.getCurrentUser();
 
         log.debug("Unsubscribe from {} was requested for {}", subject.getName(), user.getUsername());
 
         user.unsubscribeFromSubject(subject);
         subject.unsubscribeUser(user);
-        userRepository.save(user);
-    }
-
-    private User getCurrentUser() {
-        //TODO: custom exception
-        String username = SecurityUtils.getCurrentUserLogin().orElseThrow();
-        return userRepository.findByUsername(username).orElseThrow();
+        userService.saveUser(user);
     }
 
 }

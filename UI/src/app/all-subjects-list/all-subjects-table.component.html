@@ -9,24 +9,28 @@
     <!-- #Projects Column -->
     <ng-container matColumnDef="projects">
       <mat-header-cell *matHeaderCellDef>No. Projects</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.position }} </mat-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.projects ? element.projects.length : 0 }}
+      </mat-cell>
     </ng-container>
 
     <!-- #Exams Column -->
     <ng-container matColumnDef="exams">
       <mat-header-cell *matHeaderCellDef>No. Exams</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{ element.position }} </mat-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.exams ? element.exams.length : 0 }}
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="subscription">
       <mat-header-cell mat-header-cell *matHeaderCellDef>Subscription</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <div *ngIf="row.isSubscribed; then thenBlock; else elseBlock"></div>
+        <div *ngIf="row.subscribed; then thenBlock; else elseBlock"></div>
         <ng-template #thenBlock>
-          <button mat-raised-button color="warn" (click)="unsubscribe()">Unsubscribe</button>
+          <button mat-raised-button color="warn" (click)="unsubscribe(row)">Unsubscribe</button>
         </ng-template>
         <ng-template #elseBlock>
-          <button mat-raised-button color="accent" (click)="subscribe()">Subscribe</button>
+          <button mat-raised-button color="accent" (click)="subscribe(row)">Subscribe</button>
         </ng-template>
       </mat-cell>
     </ng-container>

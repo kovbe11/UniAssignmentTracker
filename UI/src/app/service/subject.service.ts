@@ -7,25 +7,33 @@ import { HttpClient } from '@angular/common/http';
 export class SubjectService {
   constructor(private http: HttpClient) {}
 
+  private api = 'http://localhost:8080/api';
+
   getAllSubjects(): Observable<Subject[]> {
-    return this.http.get<Subject[]>('http://localhost:8080/api/subjects');
+    return this.http.get<Subject[]>(this.api + '/subjects');
   }
 
   getSubscribedSubjects(): Observable<Subject[]> {
-    return this.http.get<Subject[]>('http://localhost:8080/api/subscribed');
+    return this.http.get<Subject[]>(this.api + '/subjects/subscribed');
   }
 
-  subscribeToSubject(subject: Subject) {}
-
-  unsubscribeFromSubject(subject: Subject) {}
-
-  upsertSubject(subject: Subject) {
-    if (subject.id) {
-    } else {
-    }
+  subscribeToSubject(subject: Subject): Observable<any> {
+    return this.http.post(this.api + '/subjects/subscribe/' + subject.id, '');
   }
 
-  addSubject(subject: Subject) {}
+  unsubscribeFromSubject(subject: Subject): Observable<any> {
+    return this.http.post(this.api + '/subjects/unsubscribe/' + subject.id, '');
+  }
 
-  deleteSubject(id: number) {}
+  updateSubject(subject: Subject) {
+    return this.http.put(this.api + '/subjects', subject);
+  }
+
+  addSubject(subject: Subject) {
+    return this.http.post(this.api + '/subjects', subject);
+  }
+
+  deleteSubject(id: number) {
+    return this.http.delete(this.api + '/subjects/' + id);
+  }
 }
