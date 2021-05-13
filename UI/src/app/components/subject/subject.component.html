@@ -42,5 +42,8 @@
     <div class="mat-headline">Projects</div>
     <app-project *ngFor="let project of subject.projects" [project]="project"></app-project>
   </div>
+  <button *ngIf="editable" mat-icon-button (click)="edit()">
+    <mat-icon>edit</mat-icon>
+  </button>
 </div>
 

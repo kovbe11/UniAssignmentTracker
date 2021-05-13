@@ -10,6 +10,9 @@ export class ExamComponent implements OnInit {
 
   @Input() exam: Exam
   @Input() basicInfo: boolean
+  @Input() editable: boolean
+
+  editing: boolean = false
 
   constructor() { }
 

@@ -9,6 +9,9 @@ import { Project } from '../../model/Project';
 export class ProjectComponent implements OnInit {
 
   @Input() project: Project
+  @Input() editable: boolean
+
+  editing: boolean = false
 
   constructor() {
   }

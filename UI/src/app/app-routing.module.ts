@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuardService } from './auth/admin-guard.service';
 import { RegisterComponent } from './components/register/register.component';
+import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AdminGuardService],
       },
+      {
+        path: 'subject/:id',
+        component: EditSubjectComponent,
+        canActivate: [AdminGuardService],
+      }
     ],
   },
   { path: 'login', component: LoginComponent },

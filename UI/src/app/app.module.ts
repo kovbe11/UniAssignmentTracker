@@ -20,7 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 import { ErrorInterceptor } from './auth/error-interceptor';
 import { AdminComponent } from './components/admin/admin.component';
@@ -35,6 +35,10 @@ import { AssignmentComponent } from './components/assignment/assignment.componen
 import { SubjectComponent } from './components/subject/subject.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegisterComponent } from './components/register/register.component';
+import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
+import { EditExamComponent } from './components/edit-exam/edit-exam.component';
+import { EditAssignmentComponent } from './components/edit-assignment/edit-assignment.component';
+import { EditProjectComponent } from './components/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,10 @@ import { RegisterComponent } from './components/register/register.component';
     AssignmentComponent,
     SubjectComponent,
     RegisterComponent,
+    EditSubjectComponent,
+    EditExamComponent,
+    EditAssignmentComponent,
+    EditProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,8 @@ import { RegisterComponent } from './components/register/register.component';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -49,15 +49,15 @@ public class Subject {
     private boolean isSubscribed = false;
 
     //this will contain project assignments too
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Getter(AccessLevel.NONE)
     private Set<Assignment> assignments = new HashSet<>();
 
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Getter(AccessLevel.NONE)
     private Set<Project> projects = new HashSet<>();
 
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @Getter(AccessLevel.NONE)
     private Set<Exam> exams = new HashSet<>();
 

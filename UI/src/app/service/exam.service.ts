@@ -1,14 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Exam } from '../model/Exam';
+import { Observable } from 'rxjs';
+import { Subject } from '../model/Subject';
 
 @Injectable()
 export class ExamService {
-  constructor(private http: HttpClient) {}
+  private api = 'http://localhost:8080/api';
 
-  createExam(exam: Exam) {}
+  constructor(private http: HttpClient) {
+  }
 
-  updateExam(exam: Exam) {}
+  getExam(id: number): Observable<Exam> {
+    return this.http.get<Exam>(this.api + '/exams/' + id);
+  }
 
-  deleteExam(id: number) {}
+  createExam(subject: Subject, exam: Exam) {
+    return this.http.post(this.api + '/subjects/' + subject.id + '/exams', exam);
+  }
+
+  updateExam(exam: Exam) {
+    return this.http.patch(this.api + '/exams/' + exam.id, exam);
+  }
+
+  deleteExam(id: number) {
+    return this.http.delete(this.api + '/exams/' + id);
+  }
 }

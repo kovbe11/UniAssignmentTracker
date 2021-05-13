@@ -25,12 +25,32 @@ export class SubjectService {
     return this.http.post(this.api + '/subjects/unsubscribe/' + subject.id, '');
   }
 
+  getSubject(id: number): Observable<Subject>{
+    return this.http.get<Subject>(this.api + '/subjects/' + id)
+  }
+
   updateSubject(subject: Subject) {
-    return this.http.put(this.api + '/subjects', subject);
+    return this.http.put(this.api + '/subjects', {
+      id: subject.id,
+      name: subject.name,
+      description: subject.description,
+      scoring: subject.scoring,
+      officialCredit: subject.officialCredit,
+      experiencedCredit: subject.experiencedCredit,
+      assignments: [],
+      projects: [],
+      exams: []
+    });
   }
 
   addSubject(subject: Subject) {
-    return this.http.post(this.api + '/subjects', subject);
+    return this.http.post(this.api + '/subjects', {
+      name: subject.name,
+      description: subject.description,
+      scoring: subject.scoring,
+      officialCredit: subject.officialCredit,
+      experiencedCredit: subject.experiencedCredit
+    });
   }
 
   deleteSubject(id: number) {

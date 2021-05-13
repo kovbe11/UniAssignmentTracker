@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { SubjectService } from '../../service/subject.service';
 import { Subject } from '../../model/Subject';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { User } from '../../model/User';
 
 @Component({
   selector: 'app-all-subjects-table',
@@ -20,11 +21,18 @@ export class SubjectsTableComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(
-    private authenticationService: AuthenticationService,
-    private router: Router,
-    private subjectService: SubjectService) {
+  currentUser: User;
+
+  constructor(private authenticationService: AuthenticationService,
+              private router: Router,
+              private subjectService: SubjectService) {
+    this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
   }
+
+  get isAdmin() {
+    return this.currentUser?.roles?.includes('ROLE_ADMIN');
+  }
+
 
   ngAfterViewInit() {
     this.subjectService.getAllSubjects().subscribe((data) => {

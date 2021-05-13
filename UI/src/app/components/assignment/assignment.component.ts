@@ -10,6 +10,9 @@ export class AssignmentComponent implements OnInit {
 
   @Input() assignment: Assignment
   @Input() basicInfo: boolean
+  @Input() editable: boolean
+
+  editing: boolean = false
 
   constructor() { }
 

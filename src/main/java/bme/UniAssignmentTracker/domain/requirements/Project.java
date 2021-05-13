@@ -22,7 +22,7 @@ public class Project {
     @Size(max = 255)
     private String experiences;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @Getter(AccessLevel.NONE)
     Subject subject;
 	

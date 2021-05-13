@@ -1,0 +1,44 @@
+<div class="p-3">
+  <div>
+    <div>
+      <mat-form-field appearance="standard" class="w-25 m-3">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" [(ngModel)]="subject.name"/>
+      </mat-form-field >
+      <mat-form-field appearance="standard" class="w-25 m-3">
+        <mat-label>Official credit</mat-label>
+        <input matInput type="text" [(ngModel)]="subject.officialCredit"/>
+      </mat-form-field>
+      <mat-form-field class="w-25 m-3">
+        <mat-label>Experienced credit</mat-label>
+        <input matInput type="text" [(ngModel)]="subject.experiencedCredit"/>
+      </mat-form-field>
+      <mat-form-field class="w-25 m-3">
+        <mat-label>Scoring</mat-label>
+        <input matInput type="text" [(ngModel)]="subject.scoring"/>
+      </mat-form-field>
+    </div>
+    <mat-form-field class="w-25 m-3">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="subject.description"></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-icon-button (click)="save()">
+    <mat-icon>save</mat-icon>
+  </button>
+  <div *ngIf="filteredAssignments(subject).length > 0">
+    <div class="mat-headline">Assignments</div>
+    <app-edit-assignment *ngFor="let assignment of filteredAssignments(subject)" [assignment]="assignment"
+                         [parentSubject]="subject"
+                         class="mt-2"></app-edit-assignment>
+  </div>
+  <div *ngIf="subject.exams && subject.exams.length > 0">
+    <div class="mat-headline">Exams</div>
+    <app-edit-exam *ngFor="let exam of subject.exams" [exam]="exam" [parentSubject]="subject"></app-edit-exam>
+  </div>
+  <div *ngIf="subject.projects && subject.projects.length > 0">
+    <div class="mat-headline">Projects</div>
+    <app-edit-project *ngFor="let project of subject.projects" [project]="project"
+                      [parentSubject]="subject"></app-edit-project>
+  </div>
+</div>
