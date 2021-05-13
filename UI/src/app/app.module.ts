@@ -23,22 +23,14 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './auth/jwt-interceptor';
 import { ErrorInterceptor } from './auth/error-interceptor';
-import { AdminComponent } from './components/admin/admin.component';
 import { SubjectService } from './service/subject.service';
 import { RequirementService } from './service/requirement.service';
-import { ProjectService } from './service/project.service';
-import { ExamService } from './service/exam.service';
-import { AssignmentService } from './service/assignment.service';
 import { ExamComponent } from './components/exam/exam.component';
 import { ProjectComponent } from './components/project/project.component';
 import { AssignmentComponent } from './components/assignment/assignment.component';
 import { SubjectComponent } from './components/subject/subject.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegisterComponent } from './components/register/register.component';
-import { EditSubjectComponent } from './components/edit-subject/edit-subject.component';
-import { EditExamComponent } from './components/edit-exam/edit-exam.component';
-import { EditAssignmentComponent } from './components/edit-assignment/edit-assignment.component';
-import { EditProjectComponent } from './components/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
@@ -47,16 +39,11 @@ import { EditProjectComponent } from './components/edit-project/edit-project.com
     SubjectsTableComponent,
     MyRequirementsTableComponent,
     LoginComponent,
-    AdminComponent,
     ExamComponent,
     ProjectComponent,
     AssignmentComponent,
     SubjectComponent,
     RegisterComponent,
-    EditSubjectComponent,
-    EditExamComponent,
-    EditAssignmentComponent,
-    EditProjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,9 +70,6 @@ import { EditProjectComponent } from './components/edit-project/edit-project.com
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     SubjectService,
     RequirementService,
-    ProjectService,
-    ExamService,
-    AssignmentService
   ],
   bootstrap: [AppComponent]
 })

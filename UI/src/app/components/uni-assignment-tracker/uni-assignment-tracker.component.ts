@@ -27,10 +27,6 @@ export class UniAssignmentTrackerComponent {
     this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
   }
 
-  get isAdmin() {
-    return this.currentUser?.roles?.includes('ROLE_ADMIN');
-  }
-
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);

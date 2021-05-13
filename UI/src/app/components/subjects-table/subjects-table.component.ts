@@ -21,16 +21,10 @@ export class SubjectsTableComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  currentUser: User;
 
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
               private subjectService: SubjectService) {
-    this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
-  }
-
-  get isAdmin() {
-    return this.currentUser?.roles?.includes('ROLE_ADMIN');
   }
 
 

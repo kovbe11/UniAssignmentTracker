@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class SubjectComponent implements OnInit {
 
   @Input() subject: Subject;
-  @Input() editable: boolean;
 
   constructor(private router: Router) {
   }
@@ -29,12 +28,5 @@ export class SubjectComponent implements OnInit {
     return subject.assignments.filter(assignment => {
       return !projectAssignments.some(projectAssignment => projectAssignment.id === assignment.id);
     });
-  }
-
-  edit() {
-    if (!this.editable) {
-      return;
-    }
-    this.router.navigate(['/subject/' + this.subject.id]);
   }
 }
