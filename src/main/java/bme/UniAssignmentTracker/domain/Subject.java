@@ -29,11 +29,10 @@ public class Subject {
     @Column(length = 100)
     private String name;
 
-    @Size(max = 255)
-    private String description;
     @Size(max = 511)
     @Column(length = 511)
-    private String experiences;
+    private String description;
+
     @Size(max = 63)
     @Column(length = 63)
     private String scoring;

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllSubjectsTableComponent } from './all-subjects-list/all-subjects-table.component';
-import { MySubjectsListComponent } from './my-subjects-list/my-subjects-list.component';
-import { MyRequirementsTableComponent } from './my-assignments-table/my-requirements-table.component';
+import { SubjectsTableComponent } from './components/subjects-table/subjects-table.component';
+import { MyRequirementsTableComponent } from './components/my-requirements-table/my-requirements-table.component';
 import { AuthGuardService } from './auth/auth-guard.service';
-import { UniAssignmentTrackerComponent } from './uni-assignment-tracker/uni-assignment-tracker.component';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
+import { UniAssignmentTrackerComponent } from './components/uni-assignment-tracker/uni-assignment-tracker.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuardService } from './auth/admin-guard.service';
+import { RegisterComponent } from './components/register/register.component';
 
 const routes: Routes = [
   {
@@ -16,15 +16,10 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: AllSubjectsTableComponent,
+        component: SubjectsTableComponent,
       },
       {
-        path: 'mySubjects',
-        component: MySubjectsListComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'myAssignments',
+        path: 'myRequirements',
         component: MyRequirementsTableComponent,
         canActivate: [AuthGuardService],
       },
@@ -36,6 +31,7 @@ const routes: Routes = [
     ],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '' },
 ];
 

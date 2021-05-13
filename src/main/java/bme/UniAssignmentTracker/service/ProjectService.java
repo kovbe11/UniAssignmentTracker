@@ -45,8 +45,6 @@ public class ProjectService {
         var subject = subjectService.findSubjectOrThrow(subjectId);
         var project = new Project();
 
-        project.setSpecification(projectDTO.getSpecification());
-        project.setDocumentation(projectDTO.getDocumentation());
         project.setExperiences(projectDTO.getExperiences());
         project.setSubject(subject);
 
@@ -57,14 +55,8 @@ public class ProjectService {
         log.debug("Patch project requested");
         var project = findProjectOrThrow(id);
 
-        if (projectDTO.getDocumentation() != null) {
-            project.setDocumentation(projectDTO.getDocumentation());
-        }
         if (projectDTO.getExperiences() != null) {
-            project.setDocumentation(projectDTO.getDocumentation());
-        }
-        if (projectDTO.getSpecification() != null) {
-            project.setSpecification(projectDTO.getSpecification());
+            project.setExperiences(projectDTO.getExperiences());
         }
 
         return projectRepository.save(project);
@@ -93,7 +85,6 @@ public class ProjectService {
 
         projectAssignment.setDeadline(assignmentDTO.getDeadline());
         projectAssignment.setDescription(assignmentDTO.getDescription());
-        projectAssignment.setMinimalRequirements(assignmentDTO.getMinimalRequirements());
         projectAssignment.setOptional(assignmentDTO.getIsOptional());
 
         return projectAssignmentRepository.save(projectAssignment);

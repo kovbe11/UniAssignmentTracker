@@ -15,14 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ProjectDTO {
 
-    @Size(max = 127)
-    @Column(length = 127)
-    private String specification;
     @Size(max = 255)
     private String experiences;
-    @Size(max = 127)
-    @Column(length = 127)
-    private String documentation;
 
     private List<AssignmentDTO> projectAssignments;
 

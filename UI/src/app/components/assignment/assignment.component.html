@@ -1,0 +1,21 @@
+<div>
+  <div *ngIf="basicInfo" class="d-flex p-1 m-2 justify-content-between">
+    <div class="col-5">
+      {{assignment.label}}
+    </div>
+    <div class="col-4">
+      Deadline:
+      {{formatDate(assignment.deadline)}}
+    </div>
+  </div>
+  <mat-divider class="my-1"></mat-divider>
+  <div class="d-flex p-3 m-2">
+    <div class="requirement-description col-9">
+      {{assignment.description}}
+    </div>
+    <mat-divider vertical></mat-divider>
+    <div class="requirement-additional-detail col-2">
+      {{assignment.optional ? "Optional" : "Required"}}
+    </div>
+  </div>
+</div>

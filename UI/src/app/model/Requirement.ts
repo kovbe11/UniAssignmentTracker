@@ -8,7 +8,7 @@ export class Requirement {
   exam?: Exam;
 }
 
-export function assignmentToRequirement(assignment: Assignment) {
+export function assignmentToRequirement(assignment: Assignment): Requirement {
   return {
     label: assignment.label,
     dueDate: assignment.deadline,
@@ -16,10 +16,10 @@ export function assignmentToRequirement(assignment: Assignment) {
   };
 }
 
-export function examToRequirement(exam: Exam) {
+export function examToRequirement(exam: Exam): Requirement {
   return {
     label: exam.label,
-    dueDate: exam.zhDate,
+    dueDate: exam.dueDate,
     exam: exam,
   };
 }

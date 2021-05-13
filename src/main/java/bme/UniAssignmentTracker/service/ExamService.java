@@ -58,8 +58,7 @@ public class ExamService {
         exam.setSubject(subject);
         exam.setExperiences(examDTO.getExperiences());
         exam.setScoring(examDTO.getScoring());
-        exam.setZhDate(examDTO.getZhDate());
-        exam.setMinimumRequirements(examDTO.getMinimumRequirements());
+        exam.setDueDate(examDTO.getDueDate());
 
         return examRepository.save(exam);
     }
@@ -70,16 +69,12 @@ public class ExamService {
 
         //TODO: maybe this logic should be put in either ExamDTO class, or in Exam, bc I will forget to update one some time
 
-        if (examDTO.getZhDate() != null) {
-            exam.setZhDate(examDTO.getZhDate());
+        if (examDTO.getDueDate() != null) {
+            exam.setDueDate(examDTO.getDueDate());
         }
 
         if (examDTO.getExperiences() != null) {
             exam.setExperiences(examDTO.getExperiences());
-        }
-
-        if (examDTO.getMinimumRequirements() != null) {
-            exam.setMinimumRequirements(examDTO.getMinimumRequirements());
         }
 
         if (examDTO.getScoring() != null) {

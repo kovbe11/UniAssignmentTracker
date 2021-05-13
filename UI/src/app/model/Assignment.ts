@@ -1,8 +1,7 @@
 export class Assignment {
   id?: number;
-  isOptional: boolean;
+  optional: boolean;
   deadline: Date;
-  minimalRequirements: string;
   description: string;
   label: string;
 }

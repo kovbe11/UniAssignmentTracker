@@ -19,14 +19,8 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 127)
-    @Column(length = 127)
-    private String specification;
     @Size(max = 255)
     private String experiences;
-    @Size(max = 127)
-    @Column(length = 127)
-    private String documentation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @Getter(AccessLevel.NONE)

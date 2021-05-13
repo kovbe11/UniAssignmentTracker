@@ -39,6 +39,8 @@ public class UserJWTController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    private static final String ERROR_KEY = "error";
+
 
     @PostMapping("/login")
     public ResponseEntity<Map<String,String>> login(@Valid @RequestBody LoginDTO loginDTO) {
@@ -47,7 +49,7 @@ public class UserJWTController {
         try {
             auth = authManager.authenticate(authToken);
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Wrong username or password!"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(ERROR_KEY, "Wrong username or password!"));
         }
         SecurityContextHolder.getContext().setAuthentication(auth);
         String jwt = jwtUtils.generateJwtToken(auth);
@@ -56,9 +58,9 @@ public class UserJWTController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/registerAdmin")
-    public ResponseEntity<String> registerAdmin(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<Map<String,String>> registerAdmin(@Valid @RequestBody LoginDTO loginDTO) {
         if (userRepository.existsByUsername(loginDTO.getUsername())) {
-            return ResponseEntity.badRequest().body("User already exists!");
+            return ResponseEntity.badRequest().body(Map.of(ERROR_KEY, "User already exists!"));
         }
 
         var user = new User();
@@ -71,13 +73,13 @@ public class UserJWTController {
         user.setAuthorities(Set.of(admin));
         userRepository.save(user);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("User is created with username: " + loginDTO.getUsername());
+        return login(loginDTO);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<Map<String,String>> registerUser(@Valid @RequestBody LoginDTO loginDTO) {
         if (userRepository.existsByUsername(loginDTO.getUsername())) {
-            return ResponseEntity.badRequest().body("User already exists!");
+            return ResponseEntity.badRequest().body(Map.of(ERROR_KEY, "User already exists!"));
         }
 
         var user = new User();
@@ -90,7 +92,7 @@ public class UserJWTController {
         user.setAuthorities(Set.of(userRole));
         userRepository.save(user);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("User is created with username: " + loginDTO.getUsername());
+        return login(loginDTO);
     }
 
 }

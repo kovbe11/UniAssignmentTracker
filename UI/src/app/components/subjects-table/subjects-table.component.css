@@ -2,19 +2,31 @@
   justify-content: center;
   padding-left: 1%;
   padding-right: 1%;
-  flex: 0 0 35%;
+  flex: 0 0 24%;
 }
 
 .mat-column-name {
-  flex: 0 0 35%;
+  flex: 0 0 24%;
+}
+
+.mat-column-assignments{
+  flex: 0 0 12%;
 }
 
 .mat-column-exams {
-  flex: 0 0 15%;
+  flex: 0 0 12%;
 }
 
 .mat-column-projects {
-  flex: 0 0 15%;
+  flex: 0 0 12%;
+}
+
+.mat-column-officialCredit{
+  flex: 0 0 8%;
+}
+
+.mat-column-experiencedCredit{
+  flex: 0 0 8%;
 }
 
 mat-cell,
@@ -28,4 +40,8 @@ mat-footer-cell {
 .mat-raised-button {
   min-width: fit-content;
   max-width: 50%;
+}
+
+mat-row.subject-row:hover {
+  background: rgba(159, 39, 210, 0.27);
 }

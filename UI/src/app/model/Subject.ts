@@ -6,7 +6,6 @@ export class Subject {
   id?: number;
   name: string;
   description: string;
-  experiences: string;
   scoring: string;
   officialCredit: number;
   experiencedCredit: number;

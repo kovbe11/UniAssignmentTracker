@@ -1,0 +1,42 @@
+<div class="mat-app-background d-flex flex-column vh-100 justify-content-center align-items-center">
+  <mat-card class="col-8 col-sm-6 col-md-5 max-width">
+    <form
+      [formGroup]="registerForm"
+      class="d-flex flex-wrap justify-content-center align-content-center w-100 h-100"
+    >
+      <mat-form-field appearance="standard" class="col-12 col-sm-8 d-block">
+        <mat-label>Username</mat-label>
+        <input tabindex="1" matInput type="text" formControlName="username" />
+        <mat-error *ngIf="username.errors?.required">This field is required</mat-error>
+        <mat-error *ngIf="username.errors?.minlength">Username must be longer than 4 characters</mat-error>
+        <mat-error *ngIf="username.errors?.maxlength">Username must be shorter than 20 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-12 col-sm-8 d-block">
+        <mat-label>Enter password</mat-label>
+        <input tabindex="2" matInput type="password" formControlName="password" />
+        <mat-error *ngIf="password.errors?.required">This field is required</mat-error>
+        <mat-error *ngIf="password.errors?.minlength">Password must be longer than 4 characters</mat-error>
+        <mat-error *ngIf="password.errors?.maxlength">Password must be shorter than 20 characters</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-12 col-sm-8 d-block mb-2">
+        <mat-label>Confirm password</mat-label>
+        <input tabindex="3" matInput type="password" formControlName="rePassword" />
+        <mat-error *ngIf="rePassword.invalid">This field is required</mat-error>
+      </mat-form-field>
+      <div *ngIf="error" class="text-danger mat-hint d-block col-12 text-center mb-1">
+        {{error}}
+      </div>
+      <button
+        tabindex="3"
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="col-6 d-block"
+        (click)="onSubmit()"
+      >
+        Register
+      </button>
+      <button mat-button routerLink="/" id="guestLink" class="my-2">Stay as guest</button>
+    </form>
+  </mat-card>
+</div>

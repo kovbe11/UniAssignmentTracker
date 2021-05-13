@@ -22,8 +22,6 @@ public class Assignment {
     private boolean isOptional;
     private Date deadline;
     @Size(max = 255)
-    private String minimalRequirements;
-    @Size(max = 255)
     private String description;
 
     @Size(max = 31)

@@ -58,7 +58,6 @@ public class AssignmentService {
         assignment.setOptional(assignmentDTO.getIsOptional());
         assignment.setDeadline(assignmentDTO.getDeadline());
         assignment.setDescription(assignmentDTO.getDescription());
-        assignment.setMinimalRequirements(assignmentDTO.getMinimalRequirements());
         assignment.setSubject(subject);
 
         return assignmentRepository.save(assignment);
@@ -78,10 +77,6 @@ public class AssignmentService {
 
         if (assignmentDTO.getDescription() != null) {
             assignment.setDescription(assignmentDTO.getDescription());
-        }
-
-        if (assignmentDTO.getMinimalRequirements() != null) {
-            assignment.setMinimalRequirements(assignmentDTO.getMinimalRequirements());
         }
 
         return assignmentRepository.save(assignment);

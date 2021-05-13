@@ -1,0 +1,38 @@
+table {
+  width: 100%;
+}
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.requirement-row:not(.expanded-row):hover {
+  background: rgba(159, 39, 210, 0.27);
+}
+
+.requirement-row td {
+  border-bottom-width: 0;
+}
+
+.requirement-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.requirement-description {
+  display: inline;
+  padding: 16px;
+}
+
+.requirement-description-attribution {
+  opacity: 0.5;
+}
+
+.requirement-additional-detail {
+  margin-top: 16px;
+}
+
+.requirement-additional-detail {
+  padding: 16px;
+  margin-top: 16px;
+}

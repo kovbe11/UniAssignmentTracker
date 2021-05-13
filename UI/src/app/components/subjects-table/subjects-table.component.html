@@ -1,3 +1,8 @@
+<mat-toolbar-row class="justify-content-end">
+    <mat-slide-toggle color="primary" (change)="onFilterChanged($event)">
+      Show only my subjects
+    </mat-slide-toggle>
+</mat-toolbar-row>
 <div>
   <mat-table mat-table [dataSource]="dataSource">
     <!-- Name Column -->
@@ -22,6 +27,30 @@
       </mat-cell>
     </ng-container>
 
+    <!-- #Assignments Column -->
+    <ng-container matColumnDef="assignments">
+      <mat-header-cell *matHeaderCellDef>No. Assignments</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.assignments ? element.assignments.length : 0 }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- #Official credit Column -->
+    <ng-container matColumnDef="officialCredit">
+      <mat-header-cell *matHeaderCellDef>Credit</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.officialCredit }}
+      </mat-cell>
+    </ng-container>
+
+    <!-- #Experienced credit Column -->
+    <ng-container matColumnDef="experiencedCredit">
+      <mat-header-cell *matHeaderCellDef>Experienced credit</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{ element.experiencedCredit }}
+      </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="subscription">
       <mat-header-cell mat-header-cell *matHeaderCellDef>Subscription</mat-header-cell>
       <mat-cell *matCellDef="let row">
@@ -36,7 +65,11 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    <mat-row *matRowDef="let subject; columns: displayedColumns" [class.selected-subject]="selectedSubject === subject"
+             (click)="selectedSubject = selectedSubject === subject ? undefined : subject" class="subject-row"></mat-row>
   </mat-table>
   <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+<div *ngIf="selectedSubject" class="p-0 p-md-5">
+  <app-subject [subject]="selectedSubject"></app-subject>
 </div>

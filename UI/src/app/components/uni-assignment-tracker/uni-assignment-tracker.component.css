@@ -20,20 +20,4 @@
   flex: 0 0 10%;
 }
 
-.title {
-  flex: 0 0 30%;
-}
 
-.placeholder {
-  flex: 0 0 30%;
-}
-.username {
-  flex: 0 0 20%;
-  text-align: right;
-}
-.logout {
-  display: flex;
-  justify-content: right;
-  padding-left: 3%;
-  flex: 0 0 10%;
-}

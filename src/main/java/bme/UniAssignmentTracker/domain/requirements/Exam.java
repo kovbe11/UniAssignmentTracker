@@ -20,14 +20,13 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date zhDate;
+    private Date dueDate;
     @Size(max = 255)
     private String experiences;
-    @Size(max = 255)
-    private String minimumRequirements;
     @Size(max = 63)
     @Column(length = 63)
     private String scoring;
+    private boolean isResit;
 
     @Size(max = 31)
     private String label;

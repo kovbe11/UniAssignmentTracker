@@ -43,7 +43,6 @@ public class SubjectDTO {
 
         subject.setName(name);
         subject.setDescription(description);
-        subject.setExperiences(experiences);
         subject.setScoring(scoring);
         subject.setOfficialCredit(officialCredit);
         subject.setExperiencedCredit(experiencedCredit);

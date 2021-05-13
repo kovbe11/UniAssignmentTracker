@@ -1,8 +1,8 @@
 export class Exam {
   id?: number;
-  zhDate: Date;
+  dueDate: Date;
   experiences: string;
-  minimumRequirements: string;
   scoring: string;
+  resit: boolean;
   label: string;
 }

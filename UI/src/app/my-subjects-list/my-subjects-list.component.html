@@ -1,9 +1,0 @@
-<div>
-  <mat-selection-list #subjects [multiple]="false">
-    <mat-list-option *ngFor="let subject of mySubjects" [value]="subject">
-      {{ subject.name }}
-    </mat-list-option>
-  </mat-selection-list>
-  <mat-paginator [pageSize]="5" showFirstLastButtons></mat-paginator>
-</div>
-<p>Option selected: {{ subjects.selectedOptions.selected[0]?.value.name }}</p>

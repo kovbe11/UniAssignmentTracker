@@ -1,0 +1,46 @@
+<div>
+  <div>
+    <div class="mat-display-1">Subject info</div>
+    <div class="d-flex p-2 m-2">
+      <div class="col-5">
+        {{subject.name}}
+      </div>
+      <mat-divider vertical></mat-divider>
+      <div class="col-3 col-md-2">
+        <div class="mat-body">Official credit</div>
+        {{subject.officialCredit}}
+      </div>
+      <mat-divider vertical></mat-divider>
+      <div class="col-3 col-md-2">
+        <div class="mat-body">Experienced credit</div>
+        {{subject.experiencedCredit}}
+      </div>
+      <mat-divider vertical class="show-md"></mat-divider>
+      <div class="col-3 show-md">
+        {{subject.scoring}}
+      </div>
+    </div>
+    <div class="d-flex p-2 m-2">
+      <div class="col-9 col-md-12">
+        {{subject.description}}
+      </div>
+      <mat-divider vertical class="hide-md"></mat-divider>
+      <div class="col-3 hide-md">
+        {{subject.scoring}}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="filteredAssignments(subject).length > 0">
+    <div class="mat-headline">Assignments</div>
+    <app-assignment *ngFor="let assignment of filteredAssignments(subject)" [assignment]="assignment" basicInfo="true" class="mt-2"></app-assignment>
+  </div>
+  <div *ngIf="subject.exams && subject.exams.length > 0">
+    <div class="mat-headline">Exams</div>
+    <app-exam *ngFor="let exam of subject.exams" [exam]="exam" basicInfo="true"></app-exam>
+  </div>
+  <div *ngIf="subject.projects && subject.projects.length > 0">
+    <div class="mat-headline">Projects</div>
+    <app-project *ngFor="let project of subject.projects" [project]="project"></app-project>
+  </div>
+</div>
+

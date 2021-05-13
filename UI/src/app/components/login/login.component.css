@@ -1,0 +1,16 @@
+.max-width {
+  max-width: 400px;
+  max-height: 320px;
+}
+
+#guestLink {
+  position: absolute;
+  top: 85%;
+  right: 1%;
+}
+
+#registerLink{
+  position: absolute;
+  top: 85%;
+  left: 1%;
+}
