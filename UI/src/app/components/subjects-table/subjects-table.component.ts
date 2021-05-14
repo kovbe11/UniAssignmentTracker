@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { AuthenticationService } from '../../auth/authentication.service';
+import { AuthenticationService } from '../../service/auth/authentication.service';
 import { Router } from '@angular/router';
 import { SubjectService } from '../../service/subject.service';
 import { Subject } from '../../model/Subject';
@@ -27,12 +27,13 @@ export class SubjectsTableComponent implements AfterViewInit {
               private subjectService: SubjectService) {
   }
 
-
   ngAfterViewInit() {
     this.subjectService.getAllSubjects().subscribe((data) => {
       this.dataSource.data = data || [];
     });
     this.dataSource.paginator = this.paginator;
+    // to be able to filter on whether we are subscribed to a subject
+    // we need a custom function for filtering
     this.dataSource.filterPredicate = ((data: Subject, filter) => {
       if (filter === 'true') {
         return data.subscribed;
@@ -42,6 +43,7 @@ export class SubjectsTableComponent implements AfterViewInit {
   }
 
   subscribe(row: any) {
+    // we can't subscribe without login, so a redirect seems like a good solution
     if (!this.authenticationService.isAuthenticated) {
       this.router.navigate(['/login']);
     }
@@ -57,10 +59,17 @@ export class SubjectsTableComponent implements AfterViewInit {
   }
 
   onFilterChanged(event: MatSlideToggleChange) {
+
     if (event.checked) {
+      // if we are not logged in, there is no reason to filter anything
+      if (!this.authenticationService.isAuthenticated) {
+        this.router.navigate(['/login']);
+      }
+      // we apply the filter to only show user's subjects
       this.dataSource.filter = 'true';
       return;
     }
+    // apply filter to show all subjects
     this.dataSource.filter = 'false';
   }
 }

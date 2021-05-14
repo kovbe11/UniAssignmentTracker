@@ -28,6 +28,7 @@ export class MyRequirementsTableComponent implements AfterViewInit {
   constructor(private requirementService: RequirementService) {}
 
   ngAfterViewInit() {
+    // we subscribe to the requirements
     this.requirementService.getRequirements().subscribe((data) => {
       this.dataSource.data = data || [];
     });

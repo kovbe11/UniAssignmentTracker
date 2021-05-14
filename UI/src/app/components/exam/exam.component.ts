@@ -9,6 +9,8 @@ import { Exam } from '../../model/Exam';
 export class ExamComponent implements OnInit {
 
   @Input() exam: Exam
+
+  // used on one page subject display
   @Input() basicInfo: boolean
 
   constructor() { }

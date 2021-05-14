@@ -6,7 +6,7 @@ tr.detail-row {
   height: 0;
 }
 
-tr.requirement-row:not(.expanded-row):hover {
+tr.requirement-row:hover {
   background: rgba(159, 39, 210, 0.27);
 }
 

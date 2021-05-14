@@ -14,9 +14,12 @@ export class RequirementService {
 
   getRequirements(): Observable<Requirement[]> {
     return this.subjectService.getSubscribedSubjects().pipe(
+      //we have an array of subjects that each have 3 arrays
       map(data => {
+        // so we first map the subjects to requirements
         let requirements = data.map(subject => [subject.exams.map(examToRequirement),
           subject.assignments.map(assignmentToRequirement)]);
+        // then we flatten it to a single array
         return flatten(flatten(requirements))
       })
     );

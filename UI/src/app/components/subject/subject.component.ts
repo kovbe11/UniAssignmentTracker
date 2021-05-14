@@ -24,6 +24,8 @@ export class SubjectComponent implements OnInit {
       return [];
     }
 
+    // project assignments would be shown twice as they are also assignments
+    // we filter so only non-project assignments are shown in assignments
     let projectAssignments = flatten(subject.projects.map(project => project.assignments));
     return subject.assignments.filter(assignment => {
       return !projectAssignments.some(projectAssignment => projectAssignment.id === assignment.id);

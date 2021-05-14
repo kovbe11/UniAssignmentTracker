@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../auth/authentication.service';
+import { AuthenticationService } from '../../service/auth/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -19,19 +19,24 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    // if we are logged in there is no reason to stay on /register
     if (this.authenticationService.isAuthenticated) {
       this.router.navigate(['/']);
     }
   }
 
+
+  // convenience
   get username() {
     return this.registerForm.controls.username;
   }
 
+  // convenience
   get password() {
     return this.registerForm.controls.password;
   }
 
+  // convenience
   get rePassword(){
     return this.registerForm.controls.rePassword;
   }
@@ -49,11 +54,13 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+    // using custom validators for a form this small, would be overkill
     if (this.password.value !== this.rePassword.value){
       this.error = "Passwords don't match!"
       return;
     }
 
+    // we register the user
     this.authenticationService
       .register(this.username.value, this.password.value)
       .subscribe(
