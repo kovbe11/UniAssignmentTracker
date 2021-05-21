@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Assignment } from '../model/Assignment';
 import { Observable } from 'rxjs';
+import { Subject } from '../model/Subject';
+import { Exam } from '../model/Exam';
+import { Project } from '../model/Project';
 
 @Injectable()
 export class AssignmentService {
@@ -14,8 +17,12 @@ export class AssignmentService {
     return this.http.get<Assignment>(this.api + '/assignments/' + id);
   }
 
-  createAssignment(assignment: Assignment) {
-    return this.http.post(this.api + '/subjects/' + assignment.id + '/assignments', assignment);
+  createAssignment(subject: Subject, assignment: Assignment) {
+    return this.http.post(this.api + '/subjects/' + subject.id + '/assignments', assignment);
+  }
+
+  createProjectAssignment(subject: Subject, project: Project, assignment: Assignment) {
+    return this.http.post(this.api + '/subjects/' + subject.id + '/projects/' + project.id + '/assignments', assignment);
   }
 
   updateAssignment(assignment: Assignment) {

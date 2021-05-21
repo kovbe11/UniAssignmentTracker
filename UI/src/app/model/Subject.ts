@@ -9,8 +9,8 @@ export class Subject {
   scoring: string;
   officialCredit: number;
   experiencedCredit: number;
-  subscribed: boolean;
-  assignments: Assignment[];
-  projects: Project[];
-  exams: Exam[];
+  subscribed?: boolean;
+  assignments?: Assignment[];
+  projects?: Project[];
+  exams?: Exam[];
 }

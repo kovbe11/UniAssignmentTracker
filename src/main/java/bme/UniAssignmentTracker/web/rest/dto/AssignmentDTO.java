@@ -1,9 +1,6 @@
 package bme.UniAssignmentTracker.web.rest.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.Size;
 import java.sql.Date;
@@ -12,10 +9,11 @@ import java.sql.Date;
 @EqualsAndHashCode
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class AssignmentDTO {
 
-    private Boolean isOptional;
+    private Boolean optional;
     private Date deadline;
     @Size(max = 255)
     private String description;

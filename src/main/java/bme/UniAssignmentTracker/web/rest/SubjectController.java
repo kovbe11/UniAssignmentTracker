@@ -63,20 +63,10 @@ public class SubjectController {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
-    public ResponseEntity<Subject> update(@PathVariable Long id, @RequestBody @Valid Subject subject) throws URISyntaxException {
-        boolean isCreate = subject.getId() == null || subject.getId() == 0;
-        //id != subject.id -> bad request
-        //if id is null, then it's just an upsert no problem
-        if (!id.equals(subject.getId()) && !isCreate) {
-            return ResponseEntity.badRequest().build();
-        }
-        var savedSubject = subjectService.save(subject);
-
-        if (isCreate) {
-            return ResponseEntity.created(new URI("/api/subjects/" + id)).body(savedSubject);
-        }
-        return ResponseEntity.ok(savedSubject);
+    @PatchMapping("/{id}")
+    public ResponseEntity<Subject> update(@PathVariable Long id, @RequestBody @Valid SubjectDTO subjectDTO) throws URISyntaxException {
+        var subject = subjectService.patchSubject(id, subjectDTO);
+        return ResponseEntity.ok(subject);
     }
 
 

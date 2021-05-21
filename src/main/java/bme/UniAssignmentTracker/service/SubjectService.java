@@ -3,9 +3,11 @@ package bme.UniAssignmentTracker.service;
 
 import bme.UniAssignmentTracker.domain.Subject;
 import bme.UniAssignmentTracker.repository.SubjectRepository;
+import bme.UniAssignmentTracker.web.rest.dto.SubjectDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,38 @@ public class SubjectService {
 
     public Subject save(Subject subject) {
         log.debug("Save subject requested");
+        return subjectRepository.save(subject);
+    }
+
+    public Subject patchSubject(Long id, SubjectDTO subjectDTO){
+        log.debug("Patch subject requested");
+        var subject = findSubjectOrThrow(id);
+
+        var newDescription = subjectDTO.getDescription();
+        if(newDescription != null){
+            subject.setDescription(newDescription);
+        }
+
+        var newName = subjectDTO.getName();
+        if(newName != null){
+            subject.setName(newName);
+        }
+
+        var newScoring = subjectDTO.getScoring();
+        if(newScoring != null){
+            subject.setScoring(newScoring);
+        }
+
+        var newOfficialCredit = subjectDTO.getOfficialCredit();
+        if(newOfficialCredit != null){
+            subject.setOfficialCredit(newOfficialCredit);
+        }
+
+        var newExperiencedCredit = subjectDTO.getExperiencedCredit();
+        if(newExperiencedCredit != null){
+            subject.setExperiencedCredit(newExperiencedCredit);
+        }
+
         return subjectRepository.save(subject);
     }
 

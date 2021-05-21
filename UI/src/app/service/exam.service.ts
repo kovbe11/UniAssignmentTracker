@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Exam } from '../model/Exam';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Subject } from '../model/Subject';
+import { throwIfEmpty } from 'rxjs/operators';
 
 @Injectable()
 export class ExamService {

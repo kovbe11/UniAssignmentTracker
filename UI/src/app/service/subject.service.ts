@@ -30,7 +30,7 @@ export class SubjectService {
   }
 
   updateSubject(subject: Subject) {
-    return this.http.put(this.api + '/subjects', {
+    return this.http.patch(this.api + '/subjects/' + subject.id, {
       id: subject.id,
       name: subject.name,
       description: subject.description,
@@ -43,17 +43,12 @@ export class SubjectService {
     });
   }
 
-  addSubject(subject: Subject) {
-    return this.http.post(this.api + '/subjects', {
-      name: subject.name,
-      description: subject.description,
-      scoring: subject.scoring,
-      officialCredit: subject.officialCredit,
-      experiencedCredit: subject.experiencedCredit
-    });
-  }
-
   deleteSubject(id: number) {
     return this.http.delete(this.api + '/subjects/' + id);
+  }
+
+  createSubject(subject: Subject) {
+    subject.id = 0;
+    return this.http.post(this.api + '/subjects', subject);
   }
 }

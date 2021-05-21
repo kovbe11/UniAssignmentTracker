@@ -23,8 +23,11 @@
       <textarea matInput [(ngModel)]="subject.description"></textarea>
     </mat-form-field>
   </div>
-  <button mat-icon-button (click)="save()">
+  <button *ngIf="!isNew" mat-icon-button (click)="save()">
     <mat-icon>save</mat-icon>
+  </button>
+  <button *ngIf="!isNew" mat-icon-button (click)="delete()">
+    <mat-icon>delete</mat-icon>
   </button>
   <div *ngIf="filteredAssignments(subject).length > 0">
     <div class="mat-headline">Assignments</div>
@@ -32,13 +35,27 @@
                          [parentSubject]="subject"
                          class="mt-2"></app-edit-assignment>
   </div>
+  <div class="mb-2">
+    <button *ngIf="!isNew" mat-raised-button routerLink="/admin">New assignment</button>
+  </div>
   <div *ngIf="subject.exams && subject.exams.length > 0">
     <div class="mat-headline">Exams</div>
-    <app-edit-exam *ngFor="let exam of subject.exams" [exam]="exam" [parentSubject]="subject"></app-edit-exam>
+    <div *ngFor="let exam of subject.exams" class="p-2">
+      <app-edit-exam  [exam]="exam" [parentSubject]="subject"></app-edit-exam>
+    </div>
+  </div>
+  <div class="mb-2">
+    <button *ngIf="!isNew" mat-raised-button routerLink="/admin">New exam</button>
   </div>
   <div *ngIf="subject.projects && subject.projects.length > 0">
     <div class="mat-headline">Projects</div>
     <app-edit-project *ngFor="let project of subject.projects" [project]="project"
                       [parentSubject]="subject"></app-edit-project>
+  </div>
+  <div class="mb-2">
+    <button *ngIf="!isNew" mat-raised-button routerLink="/admin">New project</button>
+  </div>
+  <div *ngIf="isNew" class="mt-2">
+    <button mat-raised-button color="primary" (click)="create()">Create</button>
   </div>
 </div>

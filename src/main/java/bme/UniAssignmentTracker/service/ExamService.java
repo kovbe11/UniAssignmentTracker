@@ -59,6 +59,8 @@ public class ExamService {
         exam.setExperiences(examDTO.getExperiences());
         exam.setScoring(examDTO.getScoring());
         exam.setDueDate(examDTO.getDueDate());
+        exam.setLabel(examDTO.getLabel());
+        exam.setResit(examDTO.getResit());
 
         return examRepository.save(exam);
     }
@@ -79,6 +81,14 @@ public class ExamService {
 
         if (examDTO.getScoring() != null) {
             exam.setScoring(examDTO.getScoring());
+        }
+
+        if (examDTO.getLabel() != null){
+            exam.setLabel(examDTO.getLabel());
+        }
+
+        if(examDTO.getResit() != null){
+            exam.setResit(examDTO.getResit());
         }
 
         return examRepository.save(exam);

@@ -1,0 +1,16 @@
+<div>
+  <div class="p-3 m-2">
+    {{project.experiences}}
+  </div>
+  <div class="mat-body-1 p-3 mx-2">Project assignments:</div>
+  <div class="p-5 pt-0">
+    <div *ngFor="let assignment of project.assignments" class="mb-3">
+      <app-assignment basicInfo="true" [assignment]="assignment"></app-assignment>
+    </div>
+  </div>
+  <button *ngIf="editable" mat-icon-button (click)="edit()">
+    <mat-icon>edit</mat-icon>
+  </button>
+</div>
+
+

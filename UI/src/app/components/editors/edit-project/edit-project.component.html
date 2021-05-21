@@ -1,0 +1,18 @@
+<div>
+  <mat-form-field appearance="standard" class="w-25 m-3">
+    <mat-label>Experiences</mat-label>
+    <textarea matInput [(ngModel)]="project.experiences"></textarea>
+  </mat-form-field >
+  <div class="mb-2">
+    <button *ngIf="!isNew" mat-raised-button routerLink="/admin">New project assignment</button>
+  </div>
+  <button *ngIf="!isNew" mat-icon-button (click)="save()">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button *ngIf="!isNew" mat-icon-button (click)="delete()">
+    <mat-icon>delete</mat-icon>
+  </button>
+  <div *ngIf="isNew" class="mt-2">
+    <button mat-raised-button color="primary" (click)="create()">Create</button>
+  </div>
+</div>

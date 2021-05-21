@@ -1,0 +1,30 @@
+<div class="p-5">
+  <div class="mat-headline">New subject</div>
+  <app-edit-subject isNew="true"></app-edit-subject>
+  <mat-divider class="mb-3"></mat-divider>
+  <mat-form-field>
+    <mat-label>Create for this subject</mat-label>
+    <mat-select [(ngModel)]="parentSubject">
+      <mat-option *ngFor="let subject of allSubjects" [value]="subject">
+        {{subject.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <mat-form-field *ngIf="parentSubject">
+      <mat-label>Create assignment for this project</mat-label>
+      <mat-select [(ngModel)]="parentProject">
+        <mat-option *ngFor="let project of parentSubject.projects" [value]="project">
+          {{project.id}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button *ngIf="parentSubject" mat-raised-button  class="mx-3" (click)="parentProject = undefined">Reset parent project</button>
+  </div>
+  <div class="mat-headline">New assignment</div>
+  <app-edit-assignment isNew="true" [parentSubject]="parentSubject" [parentProject]="parentProject"></app-edit-assignment>
+  <div class="mat-headline" >New exam</div>
+  <app-edit-exam isNew="true" [parentSubject]="parentSubject"></app-edit-exam>
+  <div class="mat-headline">New project</div>
+  <app-edit-project isNew="true" [parentSubject]="parentSubject"></app-edit-project>
+</div>

@@ -4,6 +4,7 @@ package bme.UniAssignmentTracker.domain;
 import bme.UniAssignmentTracker.domain.requirements.Assignment;
 import bme.UniAssignmentTracker.domain.requirements.Exam;
 import bme.UniAssignmentTracker.domain.requirements.Project;
+import bme.UniAssignmentTracker.web.rest.dto.SubjectDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;

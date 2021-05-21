@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Subject } from '../../model/Subject';
-import { Assignment } from '../../model/Assignment';
+import { Subject } from '../../../model/Subject';
+import { Assignment } from '../../../model/Assignment';
 import { flatten } from '@angular/compiler';
 import { Router } from '@angular/router';
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Assignment } from '../../model/Assignment';
+import { Assignment } from '../../../model/Assignment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assignment',
@@ -12,9 +13,7 @@ export class AssignmentComponent implements OnInit {
   @Input() basicInfo: boolean
   @Input() editable: boolean
 
-  editing: boolean = false
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -26,5 +25,12 @@ export class AssignmentComponent implements OnInit {
       return `${deadline.getFullYear()}-${zeroPad(deadline.getMonth(),2)}-${zeroPad(deadline.getDay(),2)}`
     }
     return deadline
+  }
+
+  edit() {
+    if (!this.editable) {
+      return;
+    }
+    this.router.navigate(['/assignment/' + this.assignment.id]);
   }
 }

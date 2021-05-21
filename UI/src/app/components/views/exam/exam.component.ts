@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Exam } from '../../model/Exam';
+import { Exam } from '../../../model/Exam';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-exam',
@@ -12,11 +14,15 @@ export class ExamComponent implements OnInit {
   @Input() basicInfo: boolean
   @Input() editable: boolean
 
-  editing: boolean = false
-
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  edit() {
+    if (!this.editable) {
+      return;
+    }
+    this.router.navigate(['/exam/' + this.exam.id]);
+  }
 }

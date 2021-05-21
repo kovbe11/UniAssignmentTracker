@@ -9,10 +9,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 
-@AllArgsConstructor
 @EqualsAndHashCode
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubjectDTO {
 
     @Size(min = 4, max = 100)

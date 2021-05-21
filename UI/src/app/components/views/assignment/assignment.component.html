@@ -18,4 +18,7 @@
       {{assignment.optional ? "Optional" : "Required"}}
     </div>
   </div>
+  <button *ngIf="editable" mat-icon-button (click)="edit()">
+    <mat-icon>edit</mat-icon>
+  </button>
 </div>

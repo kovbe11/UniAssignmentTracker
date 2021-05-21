@@ -85,7 +85,7 @@ public class ProjectService {
 
         projectAssignment.setDeadline(assignmentDTO.getDeadline());
         projectAssignment.setDescription(assignmentDTO.getDescription());
-        projectAssignment.setOptional(assignmentDTO.getIsOptional());
+        projectAssignment.setOptional(assignmentDTO.getOptional());
 
         return projectAssignmentRepository.save(projectAssignment);
     }

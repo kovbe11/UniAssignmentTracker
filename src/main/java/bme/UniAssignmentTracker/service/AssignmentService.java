@@ -55,9 +55,10 @@ public class AssignmentService {
         var subject = subjectService.findSubjectOrThrow(subjectId);
         var assignment = new Assignment();
 
-        assignment.setOptional(assignmentDTO.getIsOptional());
+        assignment.setOptional(assignmentDTO.getOptional());
         assignment.setDeadline(assignmentDTO.getDeadline());
         assignment.setDescription(assignmentDTO.getDescription());
+        assignment.setLabel(assignmentDTO.getLabel());
         assignment.setSubject(subject);
 
         return assignmentRepository.save(assignment);
@@ -67,8 +68,8 @@ public class AssignmentService {
         log.debug("Patch assignment requested");
         var assignment = findAssignmentOrThrow(id);
 
-        if (assignmentDTO.getIsOptional() != null) {
-            assignment.setOptional(assignmentDTO.getIsOptional());
+        if (assignmentDTO.getOptional() != null) {
+            assignment.setOptional(assignmentDTO.getOptional());
         }
 
         if (assignmentDTO.getDeadline() != null) {
@@ -77,6 +78,10 @@ public class AssignmentService {
 
         if (assignmentDTO.getDescription() != null) {
             assignment.setDescription(assignmentDTO.getDescription());
+        }
+
+        if(assignmentDTO.getLabel() != null){
+            assignment.setLabel(assignmentDTO.getLabel());
         }
 
         return assignmentRepository.save(assignment);

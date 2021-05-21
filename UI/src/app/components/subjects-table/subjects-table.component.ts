@@ -7,6 +7,7 @@ import { SubjectService } from '../../service/subject.service';
 import { Subject } from '../../model/Subject';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { User } from '../../model/User';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-all-subjects-table',
@@ -25,7 +26,8 @@ export class SubjectsTableComponent implements AfterViewInit {
 
   constructor(private authenticationService: AuthenticationService,
               private router: Router,
-              private subjectService: SubjectService) {
+              private subjectService: SubjectService,
+              private snackBar: MatSnackBar) {
     this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
   }
 
@@ -53,13 +55,15 @@ export class SubjectsTableComponent implements AfterViewInit {
     }
     this.subjectService.subscribeToSubject(row).subscribe((_) => {
       row.subscribed = true;
-    });
+      this.snackBar.open("Subscribed successfully", "Close",{duration: 3000})
+    }, error => this.snackBar.open("Error!", "Close",{duration: 3000}));
   }
 
   unsubscribe(row: any) {
     this.subjectService.unsubscribeFromSubject(row).subscribe((_) => {
       row.subscribed = false;
-    });
+      this.snackBar.open("Unsubscribed successfully", "Close",{duration: 3000})
+    }, error => this.snackBar.open("Error!", "Close",{duration: 3000}));
   }
 
   onFilterChanged(event: MatSlideToggleChange) {
@@ -69,4 +73,5 @@ export class SubjectsTableComponent implements AfterViewInit {
     }
     this.dataSource.filter = 'false';
   }
+
 }
