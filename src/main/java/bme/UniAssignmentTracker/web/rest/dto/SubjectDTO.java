@@ -17,24 +17,14 @@ import javax.validation.constraints.Size;
 public class SubjectDTO {
 
     @Size(min = 4, max = 100)
-    @Column(length = 100)
     private String name;
-
     @Size(max = 511)
-    @Column(length = 511)
     private String description;
-
     @Size(max = 63)
-    @Column(length = 63)
     private String scoring;
-
-
-    @Min(1)
-    @Max(30)
+    @Min(1) @Max(30)
     private Short officialCredit;
-
-    @Min(1)
-    @Max(30)
+    @Min(1) @Max(30)
     private Short experiencedCredit;
 
 
