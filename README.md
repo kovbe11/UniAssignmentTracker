@@ -26,4 +26,5 @@ Other:
 - JWT for auth
 - Angular Material for frontend
 
-![](/docs/app-demo.png "Screenshot of the running application")
+Screenshot of the application:
+!["demo-pic"](/docs/app-demo.PNG)
